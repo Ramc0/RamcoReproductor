@@ -183,3 +183,21 @@ audio.addEventListener("timeupdate", updateProgress);
 
 /* AUTOPLAY AUTOMÁTICO */
 audio.addEventListener("ended", nextTrack);
+
+/* ==============================
+   MODO OSCURO
+============================== */
+
+const themeToggle = document.getElementById("themeToggle");
+
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+});
+
+audio.addEventListener("play", () => {
+    document.body.classList.add("playing");
+});
+
+audio.addEventListener("pause", () => {
+    document.body.classList.remove("playing");
+});

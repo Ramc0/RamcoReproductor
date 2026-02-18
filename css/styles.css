@@ -1,18 +1,14 @@
-/* ==============================
-   RESET GENERAL
-============================== */
+/* ============================== RESET GENERAL ============================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* ==============================
-   BODY
-============================== */
+/* ============================== BODY ============================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,23 +16,24 @@ body {
     padding: 20px;
 }
 
-/* ==============================
-   CONTENEDOR PRINCIPAL
-============================== */
+/* ============================== CONTENEDOR PRINCIPAL ============================== */
 #contieneaudio {
-    width: 350px;
-    background: white;
+    width: 380px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
     border-radius: 20px;
     padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
     flex-direction: column;
     gap: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* ==============================
-   CABECERA
-============================== */
+/* ============================== CABECERA ============================== */
 #graficos {
     display: flex;
     align-items: center;
@@ -44,11 +41,11 @@ body {
 }
 
 #graficos button {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     border: none;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
     color: white;
     font-size: 24px;
     cursor: pointer;
@@ -57,10 +54,11 @@ body {
     align-items: center;
     box-shadow: 0 4px 10px rgba(110, 142, 251, 0.4);
     transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 #graficos button:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     box-shadow: 0 6px 15px rgba(110, 142, 251, 0.6);
 }
 
@@ -70,18 +68,18 @@ body {
 
 .track-title {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 20px;
     color: #333;
+    letter-spacing: 0.5px;
 }
 
 .track-artist {
-    font-size: 14px;
-    color: #777;
+    font-size: 13px;
+    opacity: 0.7;
+    color: #555;
 }
 
-/* ==============================
-   WAVEFORM (IGUAL QUE ORIGINAL)
-============================== */
+/* ============================== WAVEFORM (IGUAL QUE ORIGINAL) ============================== */
 .waveform-container {
     position: relative;
     width: 100%;
@@ -89,7 +87,8 @@ body {
     margin: 15px 0;
     border-radius: 10px;
     overflow: hidden;
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #e8edf7, #f5f7fa);
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .waveform-background {
@@ -129,14 +128,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.4);
     z-index: 4;
     pointer-events: none;
 }
 
-/* ==============================
-   PROGRESO (RESTORE ORIGINAL)
-============================== */
+/* ============================== PROGRESO (RESTORE ORIGINAL) ============================== */
 #controladores {
     position: relative;
     margin-top: 10px;
@@ -161,7 +158,7 @@ body {
 }
 
 #controladores progress::-webkit-progress-value {
-    background: linear-gradient(to right, #6e8efb, #a777e3);
+    background: linear-gradient(to right, #1e3c72, #2a5298);
     border-radius: 3px;
 }
 
@@ -190,9 +187,7 @@ body {
     color: #777;
 }
 
-/* ==============================
-   CONTROLES EXTRA
-============================== */
+/* ============================== CONTROLES EXTRA ============================== */
 .additional-controls {
     display: flex;
     justify-content: space-between;
@@ -206,27 +201,42 @@ body {
     gap: 8px;
 }
 
+/* ==============================
+   VOLUMEN PERSONALIZADO
+============================== */
+
 .volume-control input[type="range"] {
     width: 80px;
     height: 4px;
-    background: #e0e0e0;
-    border-radius: 2px;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    border-radius: 4px;
     outline: none;
+    appearance: none;
+}
+
+.volume-control input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
 }
 
 .volume-control input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
+    margin-top: -4px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: #6e8efb;
+    background: #ffffff;
+    border: 2px solid #1e3c72;
     cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-/* ==============================
-   PLAYLIST DINÁMICA
-============================== */
+.volume-control input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
 
+/* ============================== PLAYLIST DINÁMICA ============================== */
 #playlist {
     margin-top: 20px;
     display: flex;
@@ -240,16 +250,92 @@ body {
     padding: 8px 10px;
     border-radius: 8px;
     cursor: pointer;
-    background: #f2f2f2;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     font-size: 13px;
-    transition: background 0.2s ease;
+    transition: all 0.25s ease;
 }
 
 .playlist-item:hover {
-    background: #e0e0e0;
+    background: rgba(42, 82, 152, 0.15);
+    transform: translateX(4px);
 }
 
 .playlist-item.active {
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    box-shadow: 0 4px 15px rgba(30, 60, 114, 0.4);
     color: white;
+}
+
+/* ============================== BOTÓN TEMA ============================== */
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* ============================== ANIMACIÓN PLAY ============================== */
+.playing #playBtn {
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(110, 142, 251, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(110, 142, 251, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(110, 142, 251, 0);
+    }
+}
+
+/* ============================== MODO OSCURO ============================== */
+body.dark {
+    background: linear-gradient(135deg, #1f1f1f, #121212);
+}
+
+.dark #contieneaudio {
+    background: rgba(30, 30, 30, 0.9);
+    color: white;
+}
+
+.dark .track-title {
+    color: white;
+}
+
+.dark .track-artist {
+    color: #ccc;
+}
+
+.dark .playlist-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .playlist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#playlist::-webkit-scrollbar {
+    width: 6px;
+}
+
+#playlist::-webkit-scrollbar-thumb {
+    background: rgba(42, 82, 152, 0.5);
+    border-radius: 10px;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+#playlist {
+    overflow-x: hidden;
 }
