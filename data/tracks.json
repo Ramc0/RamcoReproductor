@@ -1,0 +1,40 @@
+{
+  "tracks": [
+    {
+      "id": 1,
+      "title": "Renai Circulation",
+      "artist": "Kana Hanazawa",
+      "audio": "assets/audio/RenaiCirculation.mp3",
+      "waveform": "assets/images/waveform.png"
+    },
+    {
+      "id": 2,
+      "title": "Sample Track 2",
+      "artist": "Artista Demo",
+      "audio": "assets/audio/sample2.mp3",
+      "waveform": "assets/images/waveform.png"
+    },
+    {
+      "id": 3,
+      "title": "Sample Track 3",
+      "artist": "Artista Demo",
+      "audio": "assets/audio/sample2.mp3",
+      "waveform": "assets/images/waveform.png"
+    },
+    {
+      "id": 4,
+      "title": "Sample Track 4",
+      "artist": "Artista Demo",
+      "audio": "assets/audio/sample2.mp3",
+      "waveform": "assets/images/waveform.png"
+    },
+    {
+      "id": 5,
+      "title": "Sample Track 5",
+      "artist": "Artista Demo",
+      "audio": "assets/audio/sample2.mp3",
+      "waveform": "assets/images/waveform.png"
+    }
+
+  ]
+}
