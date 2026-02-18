@@ -1,5 +1,8 @@
 const audio = document.getElementById("audioPlayer");
 const playBtn = document.getElementById("playBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
 const progressBar = document.querySelector("progress");
 const seekBar = document.querySelector("#controladores input[type='range']");
 const currentTimeEl = document.getElementById("currentTime");
@@ -26,8 +29,7 @@ fetch("data/tracks.json")
         tracks = data.tracks;
         renderPlaylist();
         loadTrack(0);
-    })
-    .catch(error => console.error("Error cargando tracks:", error));
+    });
 
 /* ==============================
    RENDER PLAYLIST
@@ -43,9 +45,7 @@ function renderPlaylist() {
 
         item.addEventListener("click", () => {
             loadTrack(index);
-            audio.play();
-            playBtn.textContent = "❚❚";
-            isPlaying = true;
+            playCurrentTrack();
         });
 
         playlistContainer.appendChild(item);
@@ -68,6 +68,55 @@ function loadTrack(index) {
     currentTrackIndex = index;
     updateActiveTrack();
 }
+
+/* ==============================
+   REPRODUCIR ACTUAL
+============================== */
+
+function playCurrentTrack() {
+    audio.play();
+    playBtn.textContent = "❚❚";
+    isPlaying = true;
+}
+
+/* ==============================
+   SIGUIENTE / ANTERIOR
+============================== */
+
+function nextTrack() {
+    currentTrackIndex++;
+    if (currentTrackIndex >= tracks.length) {
+        currentTrackIndex = 0; // loop al inicio
+    }
+    loadTrack(currentTrackIndex);
+    playCurrentTrack();
+}
+
+function prevTrack() {
+    currentTrackIndex--;
+    if (currentTrackIndex < 0) {
+        currentTrackIndex = tracks.length - 1; // loop al final
+    }
+    loadTrack(currentTrackIndex);
+    playCurrentTrack();
+}
+
+/* ==============================
+   BOTONES
+============================== */
+
+playBtn.addEventListener("click", function () {
+    if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = "▶";
+        isPlaying = false;
+    } else {
+        playCurrentTrack();
+    }
+});
+
+nextBtn.addEventListener("click", nextTrack);
+prevBtn.addEventListener("click", prevTrack);
 
 /* ==============================
    MARCAR ACTIVA
@@ -112,26 +161,9 @@ function updateProgress() {
     updateTimeDisplay();
 }
 
-/* ==============================
-   PLAY / PAUSE
-============================== */
-
-playBtn.addEventListener("click", function () {
-    if (isPlaying) {
-        audio.pause();
-        playBtn.textContent = "▶";
-    } else {
-        audio.play();
-        playBtn.textContent = "❚❚";
-    }
-    isPlaying = !isPlaying;
-});
-
-/* SEEK */
 seekBar.addEventListener("input", function () {
     if (audio.duration) {
-        const progress = this.value;
-        audio.currentTime = progress * audio.duration;
+        audio.currentTime = this.value * audio.duration;
     }
 });
 
@@ -149,7 +181,5 @@ playbackRate.addEventListener("change", function () {
 audio.addEventListener("loadedmetadata", updateTimeDisplay);
 audio.addEventListener("timeupdate", updateProgress);
 
-audio.addEventListener("ended", function () {
-    isPlaying = false;
-    playBtn.textContent = "▶";
-});
+/* AUTOPLAY AUTOMÁTICO */
+audio.addEventListener("ended", nextTrack);
